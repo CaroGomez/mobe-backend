@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="roles")
-public class Rol implements Serializable {
+public class RolEntity implements Serializable {
 
     @Id
     @Column(name = "id", nullable = false)
