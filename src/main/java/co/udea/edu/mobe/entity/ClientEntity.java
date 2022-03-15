@@ -1,6 +1,8 @@
 package co.udea.edu.mobe.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +15,7 @@ public class ClientEntity implements Serializable {
 
     @Id
     @Column(nullable = false)
+    @NotFound(action= NotFoundAction.IGNORE)
     private String id;
 
     @Column(nullable = false)

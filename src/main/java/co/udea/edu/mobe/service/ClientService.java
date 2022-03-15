@@ -18,9 +18,21 @@ public class ClientService {
     private ClientRepositoryJPA clientRepositoryJPA;
     private final ModelMapper mapper = new ModelMapper();
 
-    public ResponseEntity<Object> register(ClientModel clientModel){
-        ClientEntity clientEntity = mapper.map(clientModel, ClientEntity.class);
-        clientRepositoryJPA.save(clientEntity);
-        return new ResponseEntity<>("creado", new HttpHeaders(), HttpStatus.OK);
+    public ResponseEntity<Object> register(ClientModel clientModel) {
+        ClientEntity clientEntity = mapper.map(clientModel, ClientEntity.class); //separar dependencias
+        ClientEntity clientEntity1;
+        try {
+            clientEntity1 = clientRepositoryJPA.findClientById(clientEntity.getId());
+        } catch (Exception e) {
+            return new ResponseEntity<>("Ha ocurrido un error en la consulta", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (clientEntity1 == null) {
+            clientRepositoryJPA.save(clientEntity);
+            return new ResponseEntity<>("creado", new HttpHeaders(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("el usuario ya se encuentra registrado", new HttpHeaders(), HttpStatus.BAD_REQUEST);
+
     }
 }
