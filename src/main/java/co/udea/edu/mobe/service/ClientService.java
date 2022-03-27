@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import co.udea.edu.mobe.entity.ClientEntity;
@@ -18,6 +19,11 @@ public class ClientService {
     private ClientRepositoryJPA clientRepositoryJPA;
     private final ModelMapper mapper = new ModelMapper();
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+
     public ResponseEntity<Object> register(ClientModel clientModel) {
         ClientEntity clientEntity = mapper.map(clientModel, ClientEntity.class); //separar dependencias
         ClientEntity clientEntity1;
@@ -28,6 +34,8 @@ public class ClientService {
         }
 
         if (clientEntity1 == null) {
+            String passwordEncoded = bCryptPasswordEncoder.encode(clientEntity.getPassword());
+            clientEntity.setPassword(passwordEncoded);
             clientRepositoryJPA.save(clientEntity);
             return new ResponseEntity<>("creado", new HttpHeaders(), HttpStatus.OK);
         }

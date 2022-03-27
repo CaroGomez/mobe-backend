@@ -1,5 +1,5 @@
 package co.udea.edu.mobe.entity;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -27,7 +27,7 @@ public class ClientEntity implements Serializable {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length=60)
     private String password;
 
     @Column(nullable = false)
