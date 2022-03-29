@@ -54,23 +54,58 @@
 			<artifactId>spring-security-jwt</artifactId>
 			<version>1.1.1.RELEASE</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
-<!--		<dependency>-->
-<!--			<groupId>javax.xml.bind</groupId>-->
-<!--			<artifactId>jaxb-api</artifactId>-->
-<!--			<version>2.4.0-b180830.0359</version>-->
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>2.6.5</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+
+		<!--		<dependency>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-google</artifactId>-->
+<!--			<version>1.0.0.RELEASE</version>-->
 <!--		</dependency>-->
-<!--		&lt;!&ndash; https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime &ndash;&gt;-->
 <!--		<dependency>-->
-<!--			<groupId>org.glassfish.jaxb</groupId>-->
-<!--			<artifactId>jaxb-runtime</artifactId>-->
-<!--			<version>3.0.2</version>-->
+<!--			<groupId>org.springframework.social</groupId>-->
+<!--			<artifactId>spring-social-facebook</artifactId>-->
+<!--			<version>2.0.3.RELEASE</version>-->
 <!--		</dependency>-->
 		<!-- PostgreSQL used in Staging and Production environment, e.g. on Heroku -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.2.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client</artifactId>
+			<version>1.33.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client-jackson2 -->
+		<dependency>
+			<groupId>com.google.api-client</groupId>
+			<artifactId>google-api-client-jackson2</artifactId>
+			<version>1.20.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-social-facebook -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-social-facebook</artifactId>
+			<version>1.5.22.RELEASE</version>
 		</dependency>
 
 		<dependency>

@@ -12,6 +12,8 @@ import co.udea.edu.mobe.entity.ClientEntity;
 import co.udea.edu.mobe.model.ClientModel;
 import co.udea.edu.mobe.repositoryjpa.ClientRepositoryJPA;
 
+import java.util.Optional;
+
 @Service
 public class ClientService {
 
@@ -41,6 +43,17 @@ public class ClientService {
         }
 
         return new ResponseEntity<>("el usuario ya se encuentra registrado", new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
 
+    public boolean validateUserEmail(String email) {
+        return (clientRepositoryJPA.findClientEntityByEmail(email) != null);
+    }
+
+    public Optional<ClientEntity> getClientByEmailOptional(String email) {
+        return clientRepositoryJPA.findByEmail(email);
+    }
+
+    public ClientEntity getClientByEmail(String email) {
+        return clientRepositoryJPA.findClientEntityByEmail(email);
     }
 }

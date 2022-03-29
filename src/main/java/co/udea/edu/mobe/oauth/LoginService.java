@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -29,7 +30,7 @@ public class LoginService implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        ClientEntity clientEntity = clientRepositoryJPA.findByEmail(username);
+        ClientEntity clientEntity = clientRepositoryJPA.findClientEntityByEmail(username);
 
         if(clientEntity == null){
             logger.error("Error en el login: No existe el usuario en el sistema");
