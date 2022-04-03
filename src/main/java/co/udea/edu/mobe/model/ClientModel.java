@@ -2,11 +2,13 @@ package co.udea.edu.mobe.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ClientModel {
 
     private String id;

@@ -5,11 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import co.udea.edu.mobe.entity.ClientEntity;
 import co.udea.edu.mobe.model.ClientModel;
 import co.udea.edu.mobe.repositoryjpa.ClientRepositoryJPA;
+
+import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -18,9 +21,39 @@ public class ClientService {
     private ClientRepositoryJPA clientRepositoryJPA;
     private final ModelMapper mapper = new ModelMapper();
 
-    public ResponseEntity<Object> register(ClientModel clientModel){
-        ClientEntity clientEntity = mapper.map(clientModel, ClientEntity.class);
-        clientRepositoryJPA.save(clientEntity);
-        return new ResponseEntity<>("creado", new HttpHeaders(), HttpStatus.OK);
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+
+    public ResponseEntity<Object> register(ClientModel clientModel) {
+        ClientEntity clientEntity = mapper.map(clientModel, ClientEntity.class); //separar dependencias
+        ClientEntity clientEntity1;
+        try {
+            clientEntity1 = clientRepositoryJPA.findClientById(clientEntity.getId());
+        } catch (Exception e) {
+            return new ResponseEntity<>("Ha ocurrido un error en la consulta", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if (clientEntity1 == null) {
+            String passwordEncoded = bCryptPasswordEncoder.encode(clientEntity.getPassword());
+            clientEntity.setPassword(passwordEncoded);
+            clientRepositoryJPA.save(clientEntity);
+            return new ResponseEntity<>("creado", new HttpHeaders(), HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>("el usuario ya se encuentra registrado", new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    public boolean validateUserEmail(String email) {
+        return (clientRepositoryJPA.findClientEntityByEmail(email) != null);
+    }
+
+    public Optional<ClientEntity> getClientByEmailOptional(String email) {
+        return clientRepositoryJPA.findByEmail(email);
+    }
+
+    public ClientEntity getClientByEmail(String email) {
+        return clientRepositoryJPA.findClientEntityByEmail(email);
     }
 }
