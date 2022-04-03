@@ -11,6 +11,7 @@
 	<groupId>co.udea.edu</groupId>
 	<artifactId>mobe</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>mobe</name>
 	<description>Aplicación para la gestión del día a día de los motociclistas</description>
 	<properties>
