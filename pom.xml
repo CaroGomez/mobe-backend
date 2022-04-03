@@ -62,6 +62,11 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 			<version>2.6.5</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
 		<dependency>
@@ -70,18 +75,6 @@
 			<version>0.9.1</version>
 		</dependency>
 
-
-		<!--		<dependency>-->
-<!--			<groupId>org.springframework.social</groupId>-->
-<!--			<artifactId>spring-social-google</artifactId>-->
-<!--			<version>1.0.0.RELEASE</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>org.springframework.social</groupId>-->
-<!--			<artifactId>spring-social-facebook</artifactId>-->
-<!--			<version>2.0.3.RELEASE</version>-->
-<!--		</dependency>-->
-		<!-- PostgreSQL used in Staging and Production environment, e.g. on Heroku -->
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -128,6 +121,15 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<release>1.8</release>
 				</configuration>
 			</plugin>
 		</plugins>
